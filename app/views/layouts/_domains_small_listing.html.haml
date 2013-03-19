@@ -4,7 +4,7 @@
   =link_to 'Clear selection' ,"#","data-bind" => "click: clear_selection"
 
 %ul.vertical{style: "font-size: 15px;margin-top:10px;","data-bind" => "foreach: domains"}
-  %li
+  %li{style: "margin-bottom: 10px;"}
     %input{:type => "checkbox", "data-bind" => "value: id, checked: $root.selected_domains"}
-    %span{style: "margin-bottom: 10px;","data-bind" => "text: name"}
+    %span{"data-bind" => "text: name"}
   
