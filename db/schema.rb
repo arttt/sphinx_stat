@@ -11,16 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321122145) do
+ActiveRecord::Schema.define(:version => 20130321122147) do
 
-  create_table "domains", :force => true do |t|
-    t.string   "domain_name"
-    t.string   "sphinx_config_path"
-    t.integer  "sphinx_config_file_indexing_period"
-    t.integer  "sphinx_config_file_offset"
+  create_table "sphinx_log_lines", :force => true do |t|
+    t.datetime "query_date"
+    t.string   "match_mode"
+    t.float    "query_time"
+    t.integer  "filters_count"
+    t.string   "sort_mode"
+    t.integer  "total_matches"
+    t.string   "offset"
+    t.string   "limit"
+    t.string   "groupby_attr"
+    t.string   "index_name"
+    t.text     "query_str"
+    t.integer  "sphinx_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "sphinxes", :force => true do |t|
+    t.string   "name"
+    t.string   "log_file_path"
     t.integer  "weight"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

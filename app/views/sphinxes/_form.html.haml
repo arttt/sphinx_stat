@@ -1,0 +1,19 @@
+= form_for @sphinx do |f|
+  - if @sphinx.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sphinx.errors.count, "error")} prohibited this sphinx from being saved:"
+      %ul
+        - @sphinx.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :log_file_path
+    = f.text_field :log_file_path
+  /.field
+  /  = f.label :weight
+  / = f.number_field :weight
+  .actions
+    = f.submit 'Save'

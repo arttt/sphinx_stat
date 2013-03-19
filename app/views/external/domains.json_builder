@@ -1,4 +1,0 @@
-domains Domain.all do |domain|
-	id domain.id
-	name domain.domain_name
-end

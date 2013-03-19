@@ -1,5 +1,5 @@
-.c-block-1.left
-  = render 'layouts/domains_small_listing'   
+= render 'layouts/sphinxes_small_listing'   
+/%hr
 .c-block-1.left{style: "margin-left:10%;"}
   .left
     %input{id: "date_from",:type => "text", "data-bind" => "value: date_from"}
@@ -11,42 +11,69 @@
   .left 
     %a.button-2{style: "margin-left: 18px;","data-bind" => "click: search"}
       SEARCH
-.wr-80.right
-  %div{"data-bind" => "template: {name: 'data_template', if: $root.search_result().length > 0 }"}
+.c-block-1.left{ "data-bind" => "foreach: sort_limits"}
+  .left{style: "padding: 4px;margin-left:10px;cursor: pointer;","data-bind" => "text: $data,click: function(limit){ $root.current_sort_limit(limit); },style: { border: $root.current_sort_limit() == $data ? '1px solid #cccccc' : 'none' }"}
+.wr-100
+  %div{"data-bind" => "template: {name: 'data_template', if: $root.search_result_found().length > 0 }"}
   %div{"data-bind" => "css: { 'loading-data': $root.current_state_template() == 'loading_template'}"} 
 
 %script{:type => "text/html", :id => "loading_template"}  
   %div{style: "background-image: url('/assets/loading-1.gif');background-repeat: no-repeat;display: block;margin: 0 auto;height: 100px;background-position: 25% 50%;"} 
 
 %script{:type => "text/html", :id => "data_template"}  
-  .c-block-1
+  .c-block-1.wr-90
+    %ul.horizontal
+      %li
+        Total FOUND
+      %li
+        Total NOT FOUND
+  .wr-50.c-block-1.left
+    %h3
+      FOUND RESULS
     %table
       %thead
         %tr
           %td
-            INDEX STAT
-          %td
             FOUND
           %td
-            TOTAL QUERIES
+            QUERIES
           %td
             QUERY STRING
-      %tbody{"data-bind" => "foreach: search_result()"}
+      %tbody{"data-bind" => "foreach: search_result_found()"}
         %tr{"data-bind" => "style: { background: ($index() % 2) == 0  ? 'rgb(245, 245, 245)' : 'white' }"}
-          %td{style: "font-size: 15px;"}
-            %ul.vertical{"data-bind" => "foreach: idx_stat"}
-              %li
-                %span{"data-bind" => "text: idx_name"}
-                %span{"data-bind" => "text: idx_count"}
-          %td{width: "40%",style: "font-size: 15px;","data-bind" => "text: total_matches"}
-          %td{width: "20%",style: "font-size: 15px;","data-bind" => "text: count"}
+          /%td{style: "font-size: 15px;"}
+          /  %ul.vertical{"data-bind" => "foreach: idx_stat"}
+          /    %li
+          /      %span{"data-bind" => "text: idx_name"}
+          /      %span{"data-bind" => "text: idx_count"}
+          %td{width: "10%",style: "font-size: 15px;","data-bind" => "text: total_matches"}
+          %td{width: "10%",style: "font-size: 15px;text-align: center;padding: 0 20px;","data-bind" => "text: count"}
+          %td{"data-bind" => "text: query_str"}
+  .wr-40.c-block-1.left
+    %h3
+      NOT FOUND RESULS
+    %table
+      %thead
+        %tr
+          %td
+            QUERIES
+          %td
+            QUERY STRING
+      %tbody{"data-bind" => "foreach: search_result_not_found()"}
+        %tr{"data-bind" => "style: { background: ($index() % 2) == 0  ? 'rgb(245, 245, 245)' : 'white' }"}
+          /%td{style: "font-size: 15px;"}
+          /  %ul.vertical{"data-bind" => "foreach: idx_stat"}
+          /    %li
+          /      %span{"data-bind" => "text: idx_name"}
+          /      %span{"data-bind" => "text: idx_count"}
+          %td{width: "10%",style: "font-size: 15px;text-align: center;padding: 0 20px;","data-bind" => "text: count"}
           %td{"data-bind" => "text: query_str"}
 
 :javascript
   $(function(){
-    var domains = #{render file: 'external/domains'};
-    console.log(domains);
-    var sphinxParserViewModel = new SphinxParserViewModel(domains.domains); 
+    var sphinxes = #{render file: 'external/sphinxes'};
+    console.log(sphinxes);
+    var sphinxParserViewModel = new SphinxParserViewModel(sphinxes.sphinxes); 
     
     ko.applyBindings(sphinxParserViewModel);
     $("#date_from").datepicker({ dateFormat: 'yy-mm-dd' });

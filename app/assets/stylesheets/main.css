@@ -6,7 +6,13 @@ body {
   line-height: 18px;
   margin: 0;
 }
-
+h3 {
+  display: block;
+  background: rgb(248, 248, 248);
+  font-size: 1.2em;
+  color: rgb(131, 131, 131);
+  font-weight: bold;
+}
 .header{
 	padding: 10px;
 	height: 20px;

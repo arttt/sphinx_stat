@@ -1,0 +1,4 @@
+sphinxes Sphinx.all do |sphinx|
+	id sphinx.id
+	name sphinx.name
+end

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @sphinx.name
+%p
+  %b Log file path:
+  = @sphinx.log_file_path
+/%p
+/  %b Weight:
+/  = @sphinx.weight
+
+= link_to 'Edit', edit_sphinx_path(@sphinx)
+\|
+= link_to 'Back', sphinxes_path

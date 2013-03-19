@@ -1,5 +1,5 @@
 Sphix::Application.routes.draw do
-  resources :domains
+  resources :sphinxes
 
   post 'search', :to => 'main#search'
   

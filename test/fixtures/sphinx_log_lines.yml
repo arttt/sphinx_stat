@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  query_date: 2013-03-19 12:00:12
+  match_mode: MyString
+  query_time: 1.5
+  filters_count: 1
+  sort_mode: MyString
+  total_matches: 1
+  offset: MyString
+  limit: MyString
+  groupby_attr: MyString
+  index_name: MyString
+  query_str: MyText
+  sphinx_id: 1
+
+two:
+  query_date: 2013-03-19 12:00:12
+  match_mode: MyString
+  query_time: 1.5
+  filters_count: 1
+  sort_mode: MyString
+  total_matches: 1
+  offset: MyString
+  limit: MyString
+  groupby_attr: MyString
+  index_name: MyString
+  query_str: MyText
+  sphinx_id: 1

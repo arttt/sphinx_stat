@@ -1,0 +1,21 @@
+%h1 Listing sphinxes
+
+%table
+  %tr
+    %th Name
+    %th Log file path
+    %th Weight
+    %th
+    %th
+
+  - @sphinxes.each do |sphinx|
+    %tr
+      %td= sphinx.name
+      %td= sphinx.log_file_path
+      %td= link_to 'Show', sphinx
+      %td= link_to 'Edit', edit_sphinx_path(sphinx)
+      %td= link_to 'Destroy', sphinx, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Sphinx', new_sphinx_path
