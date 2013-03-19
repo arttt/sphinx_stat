@@ -1,5 +1,6 @@
 = render 'layouts/sphinxes_small_listing'   
-/%hr
+#calendar-me.left
+
 .c-block-1.left{style: "margin-left:10%;"}
   .left
     %input{id: "date_from",:type => "text", "data-bind" => "value: date_from"}
@@ -12,7 +13,20 @@
     %a.button-2{style: "margin-left: 18px;","data-bind" => "click: search"}
       SEARCH
 .c-block-1.left{ "data-bind" => "foreach: sort_limits"}
-  .left{style: "padding: 4px;margin-left:10px;cursor: pointer;","data-bind" => "text: $data,click: function(limit){ $root.current_sort_limit(limit); },style: { border: $root.current_sort_limit() == $data ? '1px solid #cccccc' : 'none' }"}
+  .left{style: "padding: 4px;margin-left:10px;cursor: pointer;","data-bind" => "text: $data,click: function(limit){ $root.select_sort_limit(limit); },style: { border: $root.current_sort_limit() == $data ? '1px solid #cccccc' : 'none' }"}
+.c-block-1.wr-70.left{style: "margin-top:30px;","data-bind" => "visible: statistic"}
+  %table
+    %tr
+      %td
+        TOTAL FOUND QUERIES:
+      %td
+        %strong{"data-bind" => "text: statistic().total_found"}
+    %tr
+      %td
+        TOTAL NOT FOUND QUERIES:
+      %td
+        %strong{"data-bind" => "text: statistic().total_not_found"}
+
 .wr-100
   %div{"data-bind" => "template: {name: 'data_template', if: $root.search_result_found().length > 0 }"}
   %div{"data-bind" => "css: { 'loading-data': $root.current_state_template() == 'loading_template'}"} 
@@ -21,12 +35,6 @@
   %div{style: "background-image: url('/assets/loading-1.gif');background-repeat: no-repeat;display: block;margin: 0 auto;height: 100px;background-position: 25% 50%;"} 
 
 %script{:type => "text/html", :id => "data_template"}  
-  .c-block-1.wr-90
-    %ul.horizontal
-      %li
-        Total FOUND
-      %li
-        Total NOT FOUND
   .wr-50.c-block-1.left
     %h3
       FOUND RESULS
@@ -71,11 +79,20 @@
 
 :javascript
   $(function(){
+    
     var sphinxes = #{render file: 'external/sphinxes'};
     console.log(sphinxes);
     var sphinxParserViewModel = new SphinxParserViewModel(sphinxes.sphinxes); 
-    
+     
     ko.applyBindings(sphinxParserViewModel);
+    
+    $("#calendar-me").datepicker({
+      dateFormat: 'yy-mm-dd' ,
+      onSelect: function(dateText, inst) { 
+      var dateAsString = dateText; 
+      //var dateAsObject = $(this).datepicker( 'getDate' ); 
+      sphinxParserViewModel.search_by_single_date(dateAsString);}
+    });
     $("#date_from").datepicker({ dateFormat: 'yy-mm-dd' });
     $("#date_to").datepicker({ dateFormat: 'yy-mm-dd' });
   });

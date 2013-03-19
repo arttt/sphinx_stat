@@ -2,8 +2,6 @@
 #http://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B3%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5_%D0%B2%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F
 #http://sphinxsearch.com/docs/1.10/query-log-format.html
 require 'time'
-####// TODO catch exeption for doncase
-
 class SphinxLogParser
 	class LineStatistic
 		    include Comparable
@@ -33,12 +31,22 @@ class SphinxLogParser
 	def new_search(d1,d2,sphinx,sort_limit)
 		return {found: ActiveRecord::Base.connection.execute("select query_str,
 		 COUNT(query_str) AS total_count, sum(total_matches) as filters_count
-		  from sphinx_log_lines where query_date BETWEEN '#{d1}' AND '#{d2}' and sphinx_id = #{sphinx.id} and total_matches != 0
+		  from sphinx_log_lines where query_date BETWEEN '#{d1}' AND '#{d2}' and sphinx_id = #{sphinx.id} and 
+		  total_matches != 0
 		   GROUP BY upper(query_str) order by total_count DESC limit #{sort_limit}"),
 			not_found: ActiveRecord::Base.connection.execute("select query_str,
 		 COUNT(query_str) AS total_count
 		  from sphinx_log_lines where query_date BETWEEN '#{d1}' AND '#{d2}' and sphinx_id = #{sphinx.id}
-		   and total_matches = 0 GROUP BY upper(query_str) order by total_count DESC limit #{sort_limit}")
+		   and total_matches = 0 GROUP BY upper(query_str) order by total_count DESC limit #{sort_limit}"),
+			total_found:
+			 ActiveRecord::Base.connection.execute("select COUNT(query_str) AS total_count  
+			 	from sphinx_log_lines where query_date BETWEEN 
+			 	'#{d1}' AND '#{d2}' and sphinx_id = #{sphinx.id} and total_matches != 0"),
+			total_not_found:
+			 ActiveRecord::Base.connection.execute("select COUNT(query_str) AS total_count  
+			 	from sphinx_log_lines where query_date BETWEEN 
+			 	'#{d1}' AND '#{d2}' and sphinx_id = #{sphinx.id} and total_matches = 0")
+
 		}
 	end
 	
