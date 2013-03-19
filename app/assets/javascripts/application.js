@@ -11,5 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
-//= require_tree .
+//= require knockout-2.2.1.debug
+//= require jquery-ui-timepicker-addon
+//= require jquery-ui-sliderAccess
+//= require main
+

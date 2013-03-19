@@ -1,10 +1,10 @@
 %span
-  =link_to 'Select all' ,"#"
+  =link_to 'Select all' ,"#","data-bind" => "click: select_all"
 %span
-  =link_to 'Clear selection' ,"#"
+  =link_to 'Clear selection' ,"#","data-bind" => "click: clear_selection"
 
-%ul.vertical{style: "font-size: 15px;margin-top:10px;"}
-  - Domain.all.each do |domain|
-    %li{style: "margin-bottom: 10px;"}
-      = check_box_tag :ss
-      = domain.domain_name
+%ul.vertical{style: "font-size: 15px;margin-top:10px;","data-bind" => "foreach: domains"}
+  %li
+    %input{:type => "checkbox", "data-bind" => "value: id, checked: $root.selected_domains"}
+    %span{style: "margin-bottom: 10px;","data-bind" => "text: name"}
+  

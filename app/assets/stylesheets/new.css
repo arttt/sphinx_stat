@@ -63,6 +63,8 @@ margin-left: 3px;
 border-radius: 4px 4px 4px 4px;
 text-decoration: none;
 float: left;
+  cursor: pointer;
+
 margin-right: 3px;
 }
 a.button-1 {
@@ -233,7 +235,6 @@ ul.tabs li a{
   margin: 10px;
   border-radius: 6px 6px 6px 6px;
   padding: 10px;  
-  cursor: pointer;
 }
 .c-block-1{
  border: 1px solid rgb(235, 235, 235);

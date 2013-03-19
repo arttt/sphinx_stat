@@ -2,12 +2,44 @@
   = render 'layouts/domains_small_listing'   
 .c-block-1.left{style: "margin-left:10%;"}
   .left
-    %input
+    %input{id: "date_from",:type => "text", "data-bind" => "value: date_from"}
   .left
     %span{style: "margin-left: 8px;margin-right: 8px;"}
       = "-"
   .left
-    %input
+    %input{id: "date_to",:type => "text","data-bind" => "value: date_to"}
   .left 
-    %a.button-2{style: "margin-left: 18px;"}
+    %a.button-2{style: "margin-left: 18px;","data-bind" => "click: search"}
       SEARCH
+.wr-80.right
+  %div{"data-bind" => "template: {name: $root.current_state_template()}"}
+
+%script{:type => "text/html", :id => "loading_template"}  
+  %div{style: "background-image: url('/assets/loading-1.gif');background-repeat: no-repeat;display: block;margin: 0 auto;height: 100px;background-position: 25% 50%;"} 
+
+%script{:type => "text/html", :id => "data_template"}  
+  .c-block-1
+    %table
+      %tr
+        %td{width: "20%"}
+          COUNT
+        %td{width: "40%"}
+          TOTAL MATCHES
+        %td
+          QUERY STRING
+    %table{"data-bind" => "foreach: search_result()"}
+      %tr
+        %td{width: "20%",style: "font-size: 15px;","data-bind" => "text: count"}
+        %td{width: "40%",style: "font-size: 15px;","data-bind" => "text: total_matches"}
+        %td{"data-bind" => "text: query_str"}
+
+:javascript
+  $(function(){
+    var domains = #{render file: 'external/domains'};
+    console.log(domains);
+    var sphinxParserViewModel = new SphinxParserViewModel(domains.domains); 
+    
+    ko.applyBindings(sphinxParserViewModel);
+    $("#date_from").datepicker();
+    $("#date_to").datepicker();
+  });

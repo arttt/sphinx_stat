@@ -1,0 +1,5 @@
+data @parse_result do |k,v|
+	query_str k	
+	count v.counter
+	total_matches v.total_matches
+end

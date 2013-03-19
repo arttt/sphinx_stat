@@ -1,7 +1,8 @@
 Sphix::Application.routes.draw do
   resources :domains
 
-
+  post 'search', :to => 'main#search'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
