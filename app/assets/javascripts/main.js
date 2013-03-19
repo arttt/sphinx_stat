@@ -20,10 +20,7 @@ function SphinxParserViewModel(sphinxes){
   self.search = function(){
    if (self.current_state_template() == 'loading_template')
     return;
-
   self.search_result_found([]);
-  //self.statistic(false);
-
   if(!self.validate())return;
   	self.current_state_template('loading_template');
 	var data_to_send = {

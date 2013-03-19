@@ -1,8 +1,7 @@
-#http://trentrichardson.com/examples/timepicker/
-#http://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B3%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5_%D0%B2%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F
 #http://sphinxsearch.com/docs/1.10/query-log-format.html
 require 'time'
 class SphinxLogParser
+=begin
 	class LineStatistic
 		    include Comparable
 		    attr_reader :counter,:total_matches,:index_stat
@@ -28,6 +27,21 @@ class SphinxLogParser
 		    end
 	end
 
+	def search(d1,d2,sphinx,sort_limit)
+		parsed_data = SphinxLogLine.where('query_date BETWEEN ? AND ? and sphinx_id = ?', d1, d2, sphinx.id) #.limit(sort_limit)
+		result_data = {}
+		parsed_data.each do |obj|
+		    encoded_key = obj.query_str.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '').downcase
+		    if result_data[encoded_key]
+				result_data[encoded_key].increment(obj.index_name,obj.total_matches)
+		    else
+				result_data[encoded_key] = LineStatistic.new
+				result_data[encoded_key].increment(obj.index_name,obj.total_matches)
+		    end
+		end
+		return result_data.sort_by {|_key, value| value}.reverse
+	end
+=end
 	def new_search(d1,d2,sphinx,sort_limit)
 		return {found: ActiveRecord::Base.connection.execute("select query_str,
 		 COUNT(query_str) AS total_count, sum(total_matches) as filters_count
@@ -50,20 +64,6 @@ class SphinxLogParser
 		}
 	end
 	
-	def search(d1,d2,sphinx,sort_limit)
-		parsed_data = SphinxLogLine.where('query_date BETWEEN ? AND ? and sphinx_id = ?', d1, d2, sphinx.id) #.limit(sort_limit)
-		result_data = {}
-		parsed_data.each do |obj|
-		    encoded_key = obj.query_str.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '').downcase
-		    if result_data[encoded_key]
-				result_data[encoded_key].increment(obj.index_name,obj.total_matches)
-		    else
-				result_data[encoded_key] = LineStatistic.new
-				result_data[encoded_key].increment(obj.index_name,obj.total_matches)
-		    end
-		end
-		return result_data.sort_by {|_key, value| value}.reverse
-	end
 
 	#str = "[Wed Mar 20 12:55:26 2013] 0.000 sec [ext/0/rel 0 (0,1000) @groupby-attr] [tube_ind] pointy hello"
 	#        0   1   2  3  4  5  6      7    8    9 10 11  12 13  14     15               16          17
@@ -83,6 +83,11 @@ class SphinxLogParser
 				if line_date <= last_db_date
 					next
 				end
+				query_string = res[17]
+				index_name = res[16]
+				if (query_string == @last_query_string) && (index_name != @last_index_name)
+					next
+				end
 				query_obj = {
 				    query_date: line_date,
 				    match_mode: res[9],
@@ -93,10 +98,12 @@ class SphinxLogParser
 				    offset: res[13],
 				    limit: res[14],
 				    groupby_attr: res[15],
-				    index_name: res[16],
-				    query_str: res[17],
+				    index_name: index_name,
+				    query_str: query_string,
 				    sphinx_id: sphinx.id
 				}
+				@last_query_string = query_string
+				@last_index_name = index_name
 				SphinxLogLine.create!(query_obj) 
 		    end
 		    file.close
