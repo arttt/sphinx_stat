@@ -1,4 +1,10 @@
-%ul.vertical
+%span
+  =link_to 'Select all' ,"#"
+%span
+  =link_to 'Clear selection' ,"#"
+
+%ul.vertical{style: "font-size: 15px;margin-top:10px;"}
   - Domain.all.each do |domain|
-    %li
+    %li{style: "margin-bottom: 10px;"}
+      = check_box_tag :ss
       = domain.domain_name

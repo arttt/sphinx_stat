@@ -2,9 +2,12 @@
   = render 'layouts/domains_small_listing'   
 .c-block-1.left{style: "margin-left:10%;"}
   .left
-    = select_date Date.today, :prefix => :start_date
+    %input
   .left
     %span{style: "margin-left: 8px;margin-right: 8px;"}
       = "-"
   .left
-    = select_date Date.today, :prefix => :start_date
+    %input
+  .left 
+    %a.button-2{style: "margin-left: 18px;"}
+      SEARCH

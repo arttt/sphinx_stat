@@ -13,5 +13,8 @@ body {
 	background: #000000;
 }
 .header a{
-	color: #ffffff;
+	color: rgb(177, 176, 176);
+}
+.header a:visited{
+	color: rgb(177, 176, 176);
 }

@@ -233,6 +233,7 @@ ul.tabs li a{
   margin: 10px;
   border-radius: 6px 6px 6px 6px;
   padding: 10px;  
+  cursor: pointer;
 }
 .c-block-1{
  border: 1px solid rgb(235, 235, 235);
