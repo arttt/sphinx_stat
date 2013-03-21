@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  domain_name: MyString
+  sphinx_config_path: MyString
+  sphinx_config_file_indexing_period: 1
+  sphinx_config_file_offset: 1
+  weight: 1
+
+two:
+  domain_name: MyString
+  sphinx_config_path: MyString
+  sphinx_config_file_indexing_period: 1
+  sphinx_config_file_offset: 1
+  weight: 1

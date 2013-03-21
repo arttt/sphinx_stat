@@ -1,0 +1,10 @@
+.c-block-1.left
+  = render 'layouts/domains_small_listing'   
+.c-block-1.left{style: "margin-left:10%;"}
+  .left
+    = select_date Date.today, :prefix => :start_date
+  .left
+    %span{style: "margin-left: 8px;margin-right: 8px;"}
+      = "-"
+  .left
+    = select_date Date.today, :prefix => :start_date

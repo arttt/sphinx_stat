@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Domain name:</b>
+  <%= @domain.domain_name %>
+</p>
+
+<p>
+  <b>Sphinx config path:</b>
+  <%= @domain.sphinx_config_path %>
+</p>
+
+
+<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Back', domains_path %>

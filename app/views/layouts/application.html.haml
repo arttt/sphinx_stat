@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title>
+      Sphix Parser
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application" 
+    = csrf_meta_tags 
+
+  %body
+    .header
+      %ul.horizontal
+        %li
+          =link_to 'HOME', root_path
+        %li
+          =link_to 'MANAGE DOMAINS', domains_path
+    .wr-90.center{style: 'padding-top: 40px;'}
+      = yield 

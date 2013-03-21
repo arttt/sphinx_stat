@@ -1,0 +1,17 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+}
+
+.header{
+	padding: 10px;
+	height: 20px;
+	background: #000000;
+}
+.header a{
+	color: #ffffff;
+}

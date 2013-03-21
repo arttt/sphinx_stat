@@ -1,0 +1,246 @@
+
+table.testing tr td {
+  border: 1px solid #DDDDDD;
+}
+#wr-flexible {
+}
+input {
+  border: 1px solid #CCCCCC;
+  /*-webkit-box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0.1),
+           0 0 16px rgba(0,0,0,0.1);
+   -moz-box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0.1),
+           0 0 16px rgba(0,0,0,0.1);
+   box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0.1),
+     0 0 16px rgba(0,0,0,0.1); */
+  padding: 2px;
+  background: #ffffff;
+  margin: 0;
+  border-radius: 4px 4px 4px 4px;
+}
+.soft-style select {
+  border-radius: 4px 4px 4px 4px;
+  background: transparent;
+  width: 150px;
+  padding: 0px 0px 0px 4px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  -webkit-appearance: none;
+  background: url("/favicon.ico") no-repeat 96% #FFFFFF;
+}
+div.field, div.actions {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.field_title {
+}
+.field_with_errors {
+  border-bottom: 1px solid red;
+  float: left;
+}
+ul.horizontal, ul.vertical {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.vertical {
+}
+ul.vertical li {
+}
+ul.horizontal {
+  margin-right: 10px;
+}
+ul.horizontal li {
+  float: left;
+  margin-left: 10px;
+}
+a.button-1 ,a.button-2,a.button-3,a.button-4{
+  padding: 4px 20px;
+margin-left: 3px;
+border-radius: 4px 4px 4px 4px;
+text-decoration: none;
+float: left;
+margin-right: 3px;
+}
+a.button-1 {
+  background: none repeat scroll 0 0 #848584;
+  border: 1px solid #bdb9b9;
+  color: #FFFFFF;
+}
+a.button-1:hover {
+  background: none repeat scroll 0 0 #4C4C4B;
+}
+a.button-1:visited {
+  color: #FFFFFF;
+}
+a.button-1 span {
+  color: #FFFFFF;
+}
+a.button-2 {
+  background: none repeat scroll 0 0 #F4F4F4;
+  border: 1px solid #CCCCCC;
+  color: #616161;
+}
+a.button-2:hover {
+  background: none repeat scroll 0 0 #CCCCCC;
+}
+a.button-4:hover {
+  border-bottom: 1px dotted #cccccc;
+}
+a.button-2:visited {
+  color: #616161;
+}
+a.button-2 span {
+  color: #616161;
+}
+a.button-3 {
+  background: none repeat scroll 0 0 #424241;
+  border: 1px solid #5c5c5a;
+  color: #d0d0d0;
+  padding: 2px 20px;
+}
+a.button-3:hover {
+  background: none repeat scroll 0 0 #4C4C4B;
+}
+
+.shopping-cart{
+  background: none repeat scroll 0 0 #373737;
+  border-bottom: 2px solid #3E3E3E;
+  border-left: 1px solid #3E3E3E;
+  border-radius: 0 0 5px 5px;
+  border-right: 1px solid #3E3E3E;
+  position: absolute;
+  right: 10%;
+  top: 0;
+  padding: 4px 13px;
+}
+.shopping-cart span.icon{
+  background-image: url("/images/bag-icon.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  height: 31px;
+  position: absolute;
+  right: 6px;
+  top: 1px;
+  padding-top:5px;
+  padding-left:4px;
+  width: 24px;
+}
+
+.shopping-cart:hover{
+  padding: 9px 10px;
+}
+#top-line a.cart-list-count{
+  color: #d5d3d3;
+}
+
+ul.tabs{
+  margin-left: 86px;
+  margin-top: 15px;
+  position: absolute;
+  width: 80%;
+}
+
+ul.tabs li{
+  background: url("/assets/bg-content.png") repeat scroll 0 0 transparent;
+  border-left: 1px solid #AB8848;
+  border-radius: 5px 5px 0 0;
+  border-right: 1px solid #AB8848;
+  border-top: 1px solid #AB8848;
+  float: left;
+  margin-right: 15px;
+  padding: 3px 10px;
+}
+ul.tabs li.active {
+  padding-top: 6px;
+  margin-top: -6px;
+  padding-bottom: 6px;
+
+}
+ul.tabs li.active a{
+  font-size: 1.1em;
+}
+
+ul.tabs li a{
+  color: #ffffff !important;
+  font-size: 1.0em;
+}
+
+.right{
+  float: right !important;
+}
+
+.left{
+  float: left !important;
+}
+
+.wr-10{
+  width: 10%;
+}
+.wr-20{
+  width: 20%;
+}
+.wr-30{
+  width: 30%;
+}
+.wr-35{
+  width: 35%;
+}
+.wr-40{
+  width: 40%;
+}
+.wr-50{
+  width: 50%;
+}
+.wr-60{
+  width: 60%;
+}
+.wr-70{
+  width: 70%;
+}
+.wr-80{
+  width: 80%;
+}
+.wr-90{
+  width: 90%;
+}
+.wr-100{
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.wr-100x100{
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 99%;
+}
+.link{
+  cursor: pointer;
+}
+.center{
+  margin: 0 auto !important;
+}
+.c-block-3, .c-block-1, .c-block-2{
+  overflow: auto;
+  margin: 10px;
+  border-radius: 6px 6px 6px 6px;
+  padding: 10px;  
+}
+.c-block-1{
+ border: 1px solid rgb(235, 235, 235);
+}
+.c-block-3{
+ border-top: 1px solid rgb(235, 235, 235);
+  border-radius:0px;
+}
+.c-block-2{
+  border: 1px solid rgb(228, 216, 170);
+}
