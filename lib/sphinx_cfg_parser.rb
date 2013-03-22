@@ -7,7 +7,7 @@ require 'time'
 class SphinxCfgParser
 	class LineStatistic
 		    include Comparable
-		    attr_reader :counter,:total_matches
+		    attr_reader :counter,:total_matches,:index_stat
 		    
 		    def initialize()
 				@counter = 0
@@ -58,7 +58,7 @@ class SphinxCfgParser
 				    query_str: res[17]
 				}
 				#########################################
-				parsed_data << query_obj if (query_obj[:query_date].to_date >= d1 && query_obj[:query_date].to_date <= d2)
+				parsed_data << query_obj if (query_obj[:query_date] >= d1 && query_obj[:query_date] <= d2)
 			    end
 			    file.close
 			rescue => err
@@ -95,3 +95,6 @@ class SphinxCfgParser
 		return result_data.sort_by {|_key, value| value}.reverse
 	end
 end
+
+
+################################tests

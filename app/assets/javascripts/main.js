@@ -13,8 +13,8 @@ function SphinxParserViewModel(domains){
   };
 
   self.search = function(){
-  //	if(!self.validate())return;
   self.search_result([]);
+  if(!self.validate())return;
   	self.current_state_template('loading_template');
 	var data_to_send = {
 		domains: self.selected_domains(),
@@ -24,7 +24,7 @@ function SphinxParserViewModel(domains){
 	console.log(data_to_send);
 	$.post("/search", data_to_send, function(returnedData) {
 		console.log(returnedData);
-	  	self.current_state_template('data_template');
+	  self.current_state_template('data_template');
 		self.search_result(returnedData.data);
 	});
   }

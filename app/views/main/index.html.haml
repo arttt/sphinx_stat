@@ -12,7 +12,8 @@
     %a.button-2{style: "margin-left: 18px;","data-bind" => "click: search"}
       SEARCH
 .wr-80.right
-  %div{"data-bind" => "template: {name: $root.current_state_template()}"}
+  %div{"data-bind" => "template: {name: 'data_template', if: $root.search_result().length > 0 }"}
+  %div{"data-bind" => "css: { 'loading-data': $root.current_state_template() == 'loading_template'}"} 
 
 %script{:type => "text/html", :id => "loading_template"}  
   %div{style: "background-image: url('/assets/loading-1.gif');background-repeat: no-repeat;display: block;margin: 0 auto;height: 100px;background-position: 25% 50%;"} 
@@ -20,18 +21,26 @@
 %script{:type => "text/html", :id => "data_template"}  
   .c-block-1
     %table
-      %tr
-        %td{width: "20%"}
-          COUNT
-        %td{width: "40%"}
-          TOTAL MATCHES
-        %td
-          QUERY STRING
-    %table{"data-bind" => "foreach: search_result()"}
-      %tr
-        %td{width: "20%",style: "font-size: 15px;","data-bind" => "text: count"}
-        %td{width: "40%",style: "font-size: 15px;","data-bind" => "text: total_matches"}
-        %td{"data-bind" => "text: query_str"}
+      %thead
+        %tr
+          %td
+            INDEX STAT
+          %td
+            FOUND
+          %td
+            TOTAL QUERIES
+          %td
+            QUERY STRING
+      %tbody{"data-bind" => "foreach: search_result()"}
+        %tr{"data-bind" => "style: { background: ($index() % 2) == 0  ? 'rgb(245, 245, 245)' : 'white' }"}
+          %td{style: "font-size: 15px;"}
+            %ul.vertical{"data-bind" => "foreach: idx_stat"}
+              %li
+                %span{"data-bind" => "text: idx_name"}
+                %span{"data-bind" => "text: idx_count"}
+          %td{width: "40%",style: "font-size: 15px;","data-bind" => "text: total_matches"}
+          %td{width: "20%",style: "font-size: 15px;","data-bind" => "text: count"}
+          %td{"data-bind" => "text: query_str"}
 
 :javascript
   $(function(){
@@ -40,6 +49,6 @@
     var sphinxParserViewModel = new SphinxParserViewModel(domains.domains); 
     
     ko.applyBindings(sphinxParserViewModel);
-    $("#date_from").datepicker();
-    $("#date_to").datepicker();
+    $("#date_from").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#date_to").datepicker({ dateFormat: 'yy-mm-dd' });
   });

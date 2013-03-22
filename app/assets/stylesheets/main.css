@@ -18,7 +18,14 @@ body {
 .header a:visited{
 	color: rgb(177, 176, 176);
 }
-
+.loading-data{
+  background-image: url('/assets/loading-1.gif');
+  background-repeat: no-repeat;
+  display: block;
+  margin: 0 auto;
+  height: 100px;
+  background-position: 25% 50%;
+}
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
 .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }

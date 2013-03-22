@@ -2,4 +2,8 @@ data @parse_result do |k,v|
 	query_str k	
 	count v.counter
 	total_matches v.total_matches
+	idx_stat v.index_stat.to_a do |vk|
+		idx_name vk.first
+		idx_count vk.last
+	end
 end
