@@ -61,5 +61,9 @@ end
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    manifest_files = Dir["#{Rails.root.join('app', 'assets').to_s}/*/*_manifest.*"].map { |path| File.basename(path) }
+
+    config.assets.precompile += manifest_files
+   
   end
 end
