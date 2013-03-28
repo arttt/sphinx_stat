@@ -85,7 +85,9 @@ class SphinxLogParser
 				end
 				query_string = res[17]
 				index_name = res[16]
+				total_matches = res[12].to_i
 				if (query_string == @last_query_string) && (index_name != @last_index_name)
+					@last_record.update_attributes!(total_matches: total_matches) if @last_total_matches < total_matches
 					next
 				end
 				query_obj = {
@@ -94,7 +96,7 @@ class SphinxLogParser
 				    query_time: res[7].to_f,
 				    filters_count: res[10],
 				    sort_mode: res[11],
-				    total_matches: res[12].to_i,
+				    total_matches: total_matches,
 				    offset: res[13],
 				    limit: res[14],
 				    groupby_attr: res[15],
@@ -102,9 +104,11 @@ class SphinxLogParser
 				    query_str: query_string,
 				    sphinx_id: sphinx.id
 				}
+				@last_record = SphinxLogLine.create!(query_obj) 
 				@last_query_string = query_string
 				@last_index_name = index_name
-				SphinxLogLine.create!(query_obj) 
+				@last_total_matches = total_matches
+				
 		    end
 		    file.close
 		rescue => err
