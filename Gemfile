@@ -5,7 +5,7 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'mysql2'
 
 gem 'jbuilder'
@@ -21,7 +21,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'json_builder'
-gem 'thin'
+gem 'unicorn'
 gem 'mini_magick'
 gem 'execjs'
 gem 'jquery-rails'

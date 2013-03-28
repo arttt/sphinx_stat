@@ -1,6 +1,7 @@
 Sphix::Application.routes.draw do
   resources :sphinxes
 
+
   post 'search', :to => 'main#search'
   
   # The priority is based upon order of creation:
@@ -52,7 +53,8 @@ Sphix::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'main#index'
+  match 'script/key' =>  'main#index', :as => :main
+  #root :to =>
 
   # See how all your routes lay out with "rake routes"
 

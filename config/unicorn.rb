@@ -21,11 +21,11 @@ worker_processes 4
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-APP_PATH = "/var/www/unicorn"
+APP_PATH = "/home/arttt/projects/sphinx_stat"
 working_directory APP_PATH
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen "/tmp/.sock", :backlog => 64
+listen APP_PATH + "/tmp/sockets/unicorn.sock", :backlog => 64
 listen 8080, :tcp_nopush => true
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
