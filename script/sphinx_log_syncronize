@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source /home/mazilla/.rvm/scripts/rvm
+rvm use 1.9.3
+cd /home/mazilla/www/sp.bhcont.com/sphinx_stat
+bundle install
+rake sphix_log_parser:process
